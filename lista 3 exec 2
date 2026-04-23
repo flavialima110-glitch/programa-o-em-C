@@ -12,14 +12,13 @@ int main() {
     printf("Digite a autorizacao especial (1/0): ");
     scanf("%d", &autorizacao);
 
-    // if ( 'Se tipoUsuario == 2 ') {
-    printf ('&entrada permitida');
-}
-    if ('Se tipoUsuario == 1:') {
-    printf ('entre 8 && 18 →  entrada permitida ')
-}
-   if ('fora desse horário → só enta se autorizacao == 1') {
-    printf('Caso contrário, &entrada negada');
+     // Lógica: Se estiver no horário OU tiver autorização, permite.
+    if ((horario >= 8 && horario <= 18) || autorizacao == 1) {
+        printf("ENTRADA PERMITIDA\n");
+    } else {
+        printf("ENTRADA NEGADA\n");
     }
+
+
     return 0;
 }
