@@ -1,0 +1,42 @@
+
+PARTE 3 — Programação Prática (1,0 ponto)
+https://www.programiz.com/online-compiler/3ENGhWS97kLJK
+
+PARTE 1 — Pesquisa e Fundamentação (0,5 ponto)
+Questão 1 — Pensamento Computacional
+Pesquise e responda:
+A) O que é pensamento computacional?
+O pensamento computacional é um método de resolução de problemas baseado em técnicas da ciência da computação.
+B) Explique os conceitos:
+⦁	decomposição = Dividir um problema complexo em partes menores e mais fáceis de gerenciar.
+⦁	abstração = Filtrar detalhes desnecessários, focando apenas nas informações essenciais para resolver o problema.
+⦁	reconhecimento de padrões = Identificar semelhanças, tendências ou repetições entre os problemas para usar soluções anteriores.
+⦁	algoritmo = Criar um conjunto de instruções passo a passo, claras e ordenadas, para resolver o desafio.
+C)Explique a diferença entre:
+⦁	AND (&&) = Exige que todas as condições sejam verdadeiras para o resultado ser verdadeiro. Se apenas uma falhar, o resultado é falso.
+⦁	OR (||) = Exige que pelo menos uma condição seja verdadeira para o resultado ser verdadeiro. Ele só é falso se todas falharem.
+
+PARTE 2 — Tabela Verdade (0,5 ponto)
+Questão 2 — Tabela Verdade
+Considere:
+p = idade >= 18
+q = possuiCarteira == 1
+
+A) Complete a tabela verdade para:
+p && q
+p	q	p && q
+V	V	v
+V	F	F
+F	V	F
+F	F	F
+
+B) Complete a tabela verdade para:
+p || q
+ | p | q | p || q |
+|---|---|--------|
+| V | V |    V         |
+| V | F |     V        |
+| F | V |       V      |
+| F | F |      F       |
+
+
