@@ -104,4 +104,40 @@ FLUXOGRAMA
                  ▼
               [FIM]
 
+Pseudocódico
+
+Algoritmo "Acesso_Direto"
+
+Variáveis
+   idades: vetor [1..10] de inteiro
+   autorizado, liberadas, negadas, maior, i: inteiro
+   soma: real
+
+Início
+   Para i de 1 ate 10 Faca
+      Leia(idades[i])
+      Leia(autorizado)
+
+      Se (idades[i] >= 18) OU (autorizado = 1) Entao
+         Escreva("ENTRADA LIBERADA")
+         liberadas <- liberadas + 1
+      Senao
+         Escreva("ENTRADA NEGADA")
+         negadas <- negadas + 1
+      FimSe
+
+      Se idades[i] > maior Entao
+         maior <- idades[i]
+      FimSe
+
+      soma <- soma + idades[i]
+   FimPara
+
+   Escreva("Liberadas: ", liberadas)
+   Escreva("Negadas: ", negadas)
+   Escreva("Maior idade: ", maior)
+   Escreva("Média: ", soma / 10)
+FimAlgoritmo
+
+
 
