@@ -40,3 +40,68 @@ p || q
 | F | F |      F       |
 
 
+FLUXOGRAMA
+
+[INÍCIO]
+   │
+   ▼
+[Declarar variáveis: idades[10], possuiAutorizacao, liberadas=0, negadas=0, maiorIdade=0, somaIdades=0, i=0]
+   │
+   ▼
+┌───────────────────────────────┐
+│ LOOP FOR (i de 0 até 9)       │◄─────────────────────────────────────────┐
+└──────────────┬────────────────┘                                          │
+               │ (Se i < 10)                                               │
+               ▼                                                           │
+     [Ler idade do participante]                                           │
+     [Armazenar em idades[i]]                                              │
+               │                                                           │
+               ▼                                                           │
+     [Ler possuiAutorizacao (1 ou 0)]                                      │
+               │                                                           │
+               ▼                                                           │
+      /                     \                                              │
+     < idade[i] >= 18 OU     >                                             │
+     < possuiAutorizacao == 1>                                             │
+      \                     /                                              │
+         /               \                                                 │
+  (Sim) /                 \ (Não)                                          │
+       ▼                   ▼                                               │
+[Exibir: LIBERADA]   [Exibir: NEGADA]                                      │
+[liberadas =         [negadas =                                            │
+ liberadas + 1]       negadas + 1]                                         │
+       \                   /                                               │
+        \─────────────────/                                                │
+                 │                                                         │
+                 ▼                                                         │
+       /                    \                                              │
+      <  idades[i] >         >                                             │
+      <  maiorIdade          >                                             │
+       \                    /                                              │
+          /              \                                                 │
+   (Sim) /                \ (Não)                                          │
+        ▼                  ▼                                               │
+ [maiorIdade = idades[i]]  [Manter maiorIdade]                             │
+        \                  /                                               │
+         \────────────────/                                                │
+                 │                                                         │
+                 ▼                                                         │
+[somaIdades = somaIdades + idades[i]]                                      │
+                 │                                                         │
+                 ▼                                                         │
+          [Incrementar i++] ───────────────────────────────────────────────┘
+                 │
+                 │ (Quando i chega a 10)
+                 ▼
+       [Calcular média = somaIdades / 10]
+                 │
+                 ▼
+       [Exibir total de liberadas]
+       [Exibir total de negadas]
+       [Exibir maiorIdade registrada]
+       [Exibir média calculada]
+                 │
+                 ▼
+              [FIM]
+
+
