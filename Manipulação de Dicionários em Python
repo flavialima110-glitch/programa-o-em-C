@@ -1,0 +1,98 @@
+ATIVIDADES PRÁTICAS - Manipulação de Dicionários em Python 
+
+print("=== 1. Cadastro de aluno ===")
+aluno = {
+    "nome": "Carlos",
+    "idade": 21,
+    "curso": "Sistemas de Informação",
+    "nota": 7.0
+}
+
+print(f"Nome: {aluno['nome']} | Curso: {aluno['curso']}")
+aluno["nota"] = 8.5
+aluno["situacao"] = "Aprovado"
+print(aluno)
+
+
+print("\n=== 2. Consulta segura com get() ===")
+produto = {
+    "nome": "Notebook",
+    "preco": 4500.00,
+    "estoque": 12
+}
+
+chave = input("Digite a informação desejada (nome, preco, estoque): ")
+resultado = produto.get(chave, "Informação não encontrada.")
+print(resultado)
+
+
+print("\n=== 3. Controle de estoque ===")
+estoque = {
+    "teclado": 15,
+    "mouse": 20,
+    "monitor": 8,
+    "notebook": 5
+}
+
+estoque["webcam"] = 10
+estoque["mouse"] = 25
+estoque.pop("monitor")
+
+for item, quantidade in estoque.items():
+    print(f"Produto: {item} | Quantidade: {quantidade}")
+
+total_itens = sum(estoque.values())
+print(f"Total de itens em estoque: {total_itens}")
+
+
+print("\n=== 4. Dicionário aninhado de alunos ===")
+turma = {
+    "2026001": {"nome": "Ana", "nota": 8.5},
+    "2026002": {"nome": "Bruno", "nota": 6.0},
+    "2026003": {"nome": "Carla", "nota": 9.2}
+}
+
+soma_notas = 0
+
+for dados in turma.values():
+    nome = dados["nome"]
+    nota = dados["nota"]
+    situacao = "Aprovado" if nota >= 7.0 else "Reprovado"
+    
+    print(f"{nome} - Nota: {nota} - Situação: {situacao}")
+    soma_notas += nota
+
+media_turma = soma_notas / len(turma)
+print(f"Média geral da turma: {media_turma:.2f}")
+
+
+print("\n=== 5. Desafio - análise de vendas ===")
+vendas = {
+    "Janeiro": 12500,
+    "Fevereiro": 9800,
+    "Março": 15300,
+    "Abril": 11700,
+    "Maio": 18400
+}
+
+total_vendido = sum(vendas.values())
+media_mensal = total_vendido / len(vendas)
+mes_maior = max(vendas, key=vendas.get)
+mes_menor = min(vendas, key=vendas.get)
+
+def formatar_moeda(valor):
+    return f"R$ {valor:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+
+print(f"Total vendido: {formatar_moeda(total_vendido)}")
+print(f"Média mensal: {formatar_moeda(media_mensal)}")
+print(f"Maior venda: {mes_maior} - {formatar_moeda(vendas[mes_maior])}")
+print(f"Menor venda: {mes_menor} - {formatar_moeda(vendas[mes_menor])}")
+
+print("\nMeses acima da média:")
+for mes, valor in vendas.items():
+    if valor > media_mensal:
+        print(mes)
+
+# Desafio adicional: dictionary comprehension
+acima_da_media = {mes: valor for mes, valor in vendas.items() if valor > media_mensal}
+print("\nDicionário acima da média:", acima_da_media)
