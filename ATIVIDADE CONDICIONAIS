@@ -1,0 +1,286 @@
+def exercicio1():
+  print("\n--- 1. CLASSIFICAÇÃO DE CRÉDITO ---")
+  idade = int(input("Idade: "))
+  salario = float(input("Salário mensal (R$): "))
+  divida_atual = float(input("Valor da dívida atual (R$): "))
+  tempo_emprego = int(input("Tempo de emprego (meses): "))
+  valor_solicitado = float(input("Valor solicitado (R$): "))
+  parcelas = int(input("Número de parcelas: "))
+
+  comprometimento_atual = divida_atual / salario
+  valor_parcela = valor_solicitado / parcelas
+  perc_nova_parcela = valor_parcela / salario
+  novo_comprometimento = comprometimento_atual + perc_nova_parcela
+
+  motivo = ""
+
+  if (
+      21 <= idade <= 65
+      and salario >= 2500
+      and tempo_emprego >= 12
+      and comprometimento_atual <= 0.30
+      and perc_nova_parcela <= 0.25
+  ):
+    resultado = "Aprovada"
+  elif (
+      21 <= idade <= 65
+      and salario >= 2500
+      and tempo_emprego >= 6
+      and novo_comprometimento <= 0.50
+  ):
+    resultado = "Aprovada com restrições"
+  else:
+    resultado = "Reprovada"
+    if not (21 <= idade <= 65):
+      motivo = "Idade fora da faixa permitida (21 a 65 anos)."
+    elif salario < 2500:
+      motivo = "Salário inferior ao mínimo exigido (R$ 2.500,00)."
+    elif tempo_emprego < 6:
+      motivo = "Tempo de emprego insuficiente (mínimo de 6 meses)."
+    elif novo_comprometimento > 0.50:
+      motivo = "Novo comprometimento de renda ultrapassa o limite de 50%."
+    else:
+      motivo = (
+          "Não atingiu os critérios mínimos de comprometimento ou tempo de"
+          " emprego."
+      )
+
+  print("\n--- RESULTADO DA ANÁLISE ---")
+  print(f"Valor da parcela: R$ {valor_parcela:.2f}")
+  print(
+      f"Percentual atual de comprometimento: {comprometimento_atual * 100:.2f}%"
+  )
+  print(f"Novo percentual de comprometimento: {novo_comprometimento * 100:.2f}%")
+  print(f"Resultado: {resultado}")
+  if motivo:
+    print(f"Motivo principal da reprovação: {motivo}")
+
+
+def exercicio2():
+  print("\n--- 2. CÁLCULO DE IMPOSTO DE RENDA ---")
+  salario_bruto = float(input("Salário bruto (R$): "))
+  dependentes = int(input("Quantidade de dependentes: "))
+  previdencia = float(input("Valor pago em previdência (R$): "))
+  pensao = float(input("Valor pago em pensão alimentícia (R$): "))
+
+  deducao_dependentes = dependentes * 250.0
+  total_deducoes = previdencia + pensao + deducao_dependentes
+
+  if total_deducoes > salario_bruto:
+    print("\nAviso: O total de deduções supera o salário bruto.")
+    base_calculo = 0.0
+  else:
+    base_calculo = salario_bruto - total_deducoes
+
+  if base_calculo <= 2500:
+    aliquota = 0.0
+  elif base_calculo <= 3500:
+    aliquota = 0.075
+  elif base_calculo <= 5000:
+    aliquota = 0.15
+  elif base_calculo <= 7500:
+    aliquota = 0.225
+  else:
+    aliquota = 0.275
+
+  imposto = base_calculo * aliquota
+  salario_liquido = salario_bruto - previdencia - pensao - imposto
+
+  print("\n--- DEMONSTRATIVO DE IR ---")
+  print(f"Salário bruto: R$ {salario_bruto:.2f}")
+  print(f"Total de deduções: R$ {total_deducoes:.2f}")
+  print(f"Base de cálculo: R$ {base_calculo:.2f}")
+  print(f"Alíquota aplicada: {aliquota * 100:.1f}%")
+  print(f"Imposto devido: R$ {imposto:.2f}")
+  print(f"Salário líquido: R$ {salario_liquido:.2f}")
+
+
+def exercicio3():
+  print("\n--- 3. SISTEMA DE AVALIAÇÃO ACADÊMICA ---")
+  n1 = float(input("Nota 1: "))
+  n2 = float(input("Nota 2: "))
+  n3 = float(input("Nota 3: "))
+  frequencia = float(input("Percentual de frequência (%): "))
+  ativ_entregues = int(input("Quantidade de atividades entregues: "))
+  ativ_total = int(input("Quantidade total de atividades: "))
+
+  media = (n1 + n2 + n3) / 3
+  perc_atividades = (ativ_entregues / ativ_total) * 100 if ativ_total > 0 else 0
+  impedimento = "Nenhum (atingiu a classificação máxima)."
+
+  if frequencia < 75:
+    status = "Reprovado por frequência"
+    impedimento = f"Frequência de {frequencia:.1f}% (mínimo exigido é 75%)."
+  elif media < 5:
+    status = "Reprovado por nota"
+    impedimento = f"Média de {media:.2f} (mínimo para recuperação é 5,0)."
+  elif media < 7:
+    status = "Recuperação"
+    impedimento = (
+        f"Média de {media:.2f} (mínimo para aprovação direta é 7,0)."
+    )
+  elif perc_atividades < 70:
+    status = "Recuperação"
+    impedimento = (
+        f"Entregou {perc_atividades:.1f}% das atividades (mínimo para aprovação"
+        " é 70%)."
+    )
+  elif media >= 9 and frequencia >= 90 and ativ_entregues == ativ_total:
+    status = "Aprovado com excelência"
+  else:
+    status = "Aprovado"
+    if media < 9:
+      impedimento = f"Média de {media:.2f} (excelência exige 9,0)."
+    elif frequencia < 90:
+      impedimento = f"Frequência de {frequencia:.1f}% (excelência exige 90%)."
+    else:
+      impedimento = (
+          "Não entregou 100% das atividades (exigido para excelência)."
+      )
+
+  print("\n--- BOLETIM ACADÊMICO ---")
+  print(f"Média final: {media:.2f}")
+  print(f"Atividades entregues: {perc_atividades:.1f}%")
+  print(f"Classificação: {status}")
+  print(f"Principal requisito que impediu classificação superior: {impedimento}")
+
+
+def exercicio4():
+  print("\n--- 4. CÁLCULO DE FRETE INTELIGENTE ---")
+  peso = float(input("Peso da encomenda (kg): "))
+  distancia = float(input("Distância (km): "))
+  tipo_entrega = (
+      input("Tipo de entrega (normal / expressa / urgente): ").strip().lower()
+  )
+  assinante = input("Cliente é assinante? (s/n): ").strip().lower() == "s"
+  valor_compra = float(input("Valor da compra (R$): "))
+
+  taxa_peso = peso * 2.50
+  taxa_distancia = distancia * 0.30
+  subtotal = taxa_peso + taxa_distancia
+
+  perc_tipo = 0.0
+  if tipo_entrega == "expressa":
+    perc_tipo = 0.30
+  elif tipo_entrega == "urgente":
+    perc_tipo = 0.60
+
+  adicional_tipo = subtotal * perc_tipo
+  adicional_peso = 80.0 if peso > 30 else 0.0
+  adicional_distancia = 100.0 if distancia > 500 else 0.0
+
+  frete_bruto = subtotal + adicional_tipo + adicional_peso + adicional_distancia
+
+  perc_desconto = 0.0
+  if assinante:
+    perc_desconto += 0.15
+  if valor_compra > 1000:
+    perc_desconto += 0.10
+
+  perc_desconto = min(perc_desconto, 0.20)
+  valor_desconto = frete_bruto * perc_desconto
+
+  frete_gratis = (
+      assinante
+      and valor_compra >= 2000
+      and tipo_entrega == "normal"
+      and peso <= 10
+  )
+
+  frete_final = 0.0 if frete_gratis else (frete_bruto - valor_desconto)
+
+  print("\n--- DETALHAMENTO DO FRETE ---")
+  print(f"Taxa por peso: R$ {taxa_peso:.2f}")
+  print(f"Taxa por distância: R$ {taxa_distancia:.2f}")
+  print(f"Adicional por tipo de entrega ({tipo_entrega}): R$ {adicional_tipo:.2f}")
+  print(f"Adicional por excesso de peso (>30kg): R$ {adicional_peso:.2f}")
+  print(f"Adicional por longa distância (>500km): R$ {adicional_distancia:.2f}")
+  print(f"Frete bruto: R$ {frete_bruto:.2f}")
+  print(
+      f"Desconto aplicado ({perc_desconto * 100:.0f}%): -R$"
+      f" {valor_desconto:.2f}"
+  )
+  print(f"Elegível para frete grátis: {'Sim' if frete_gratis else 'Não'}")
+  print(f"VALOR FINAL DO FRETE: R$ {frete_final:.2f}")
+
+
+def exercicio5():
+  print("\n--- 5. DIAGNÓSTICO FINANCEIRO FAMILIAR ---")
+  renda = float(input("Renda mensal (R$): "))
+  moradia = float(input("Gastos com moradia (R$): "))
+  alimentacao = float(input("Gastos com alimentação (R$): "))
+  transporte = float(input("Gastos com transporte (R$): "))
+  saude = float(input("Gastos com saúde (R$): "))
+  educacao = float(input("Gastos com educação (R$): "))
+  lazer = float(input("Gastos com lazer (R$): "))
+  dividas = float(input("Gastos com dívidas (R$): "))
+
+  total_despesas = (
+      moradia + alimentacao + transporte + saude + educacao + lazer + dividas
+  )
+  saldo = renda - total_despesas
+  perc_comprometido = (total_despesas / renda) * 100
+  perc_dividas = (dividas / renda) * 100
+
+  if total_despesas > renda and abs(saldo) > (0.20 * renda):
+    situacao = "Insolvência"
+    recomendacao = (
+        "Corte imediato de gastos não essenciais, renegociação urgente de"
+        " dívidas e busca por renda extra."
+    )
+  elif perc_comprometido > 85 or perc_dividas > 35:
+    situacao = "Crítica"
+    recomendacao = (
+        "Congele novos parcelamentos, reduza lazer e priorize a quitação das"
+        " dívidas com juros mais altos."
+    )
+  elif perc_comprometido > 70 or perc_dividas > 20:
+    situacao = "Atenção"
+    recomendacao = (
+        "Revise despesas variáveis (alimentação fora e lazer) para recuperar"
+        " margem de segurança no orçamento."
+    )
+  else:
+    situacao = "Saudável"
+    recomendacao = (
+        "Mantenha o controle atual, reforce sua reserva de emergência e"
+        " direcione o saldo positivo para investimentos."
+    )
+
+  print("\n--- DIAGNÓSTICO FINANCEIRO ---")
+  print(f"Total de despesas: R$ {total_despesas:.2f}")
+  print(f"Saldo mensal: R$ {saldo:.2f}")
+  print(f"Percentual da renda comprometida: {perc_comprometido:.1f}%")
+  print(f"Percentual gasto com dívidas: {perc_dividas:.1f}%")
+  print(f"Classificação: {situacao}")
+  print(f"Recomendação: {recomendacao}")
+
+
+while True:
+  print("\n=========================================")
+  print("  MENU - ATIVIDADE ESTRUTURAS CONDICIONAIS")
+  print("=========================================")
+  print("1 - Sistema de classificação de crédito")
+  print("2 - Cálculo completo de imposto de renda")
+  print("3 - Sistema de avaliação acadêmica")
+  print("4 - Cálculo de frete inteligente")
+  print("5 - Diagnóstico financeiro familiar")
+  print("0 - Sair")
+
+  opcao = input("Escolha uma opção: ")
+
+  if opcao == "1":
+    exercicio1()
+  elif opcao == "2":
+    exercicio2()
+  elif opcao == "3":
+    exercicio3()
+  elif opcao == "4":
+    exercicio4()
+  elif opcao == "5":
+    exercicio5()
+  elif opcao == "0":
+    print("Encerrando o programa...")
+    break
+  else:
+    print("Opção inválida!")
